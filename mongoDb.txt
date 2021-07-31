@@ -1,0 +1,36 @@
+show dbs : show all databases
+use dbName : use or create database
+db : show current db 
+
+db.dropDatabase() : delete database
+db.createCollection('books') : create collection
+show collections : display collections
+db.collection.drop() : delete collection (ex: db.books.drop())
+
+
+db.collection.insert({doc}) : cretate collection and insert document
+db.collection.insertOne({doc}) : cretate collection and insert document
+db.deries.insertMany([doc1,doc2]) : insert many documents
+
+
+db.collection.find().pretty() : display documents in pretty way
+db.collection.find(query,projection)  : ex db.series.find({rate:9},{name:0})
+db.collection.find(null,projection) : ex  db.series.find(null,{name:1})
+// query operator (AND,OR,NOT ....)
+db.series.find({rate:{$gt:8}}) 
+db.series.find({rate:{$gt:8,$lte:9}})
+db.series.find({rate:{$gt:8,$lte:9}})
+db.series.find({rate:{$gt:8,$lte:9},year:{$lte:3000}})
+ db.series.find({$and:[{rate:{$gt:8}},{year:{$lt:30000}}]})
+
+db.collection.update(query, update, options)
+db.series.update({name:'got'},{$set:{rate:9}})
+db.series.update({rate:{$exists:true}},{$rename:{'rate':'rating'}})
+ db.series.updateMany({rate:{$exists:true}},{$rename:{'rate':'rating'}})
+ db.series.updateMany({rating:{$exists:true}},{$inc:{rating:5}})
+
+db.collection.remove()
+db.series.remove({name:'got'},{justOne:true})
+db.series.remove({rating:{$gt:12}})
+db.series.deleteMany({rating:{$gt:10}})
+
